@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mao.dao.ConversionsDao">
+
+    <insert id="insertConversionData" parameterType="map">
+        INSERT INTO `Project`.user_conversion(fuserId, tuserId)
+        VALUES (#{fUserId}, #{tUserId});
+    </insert>
+
+    <select id="getConversionDataById" parameterType="java.lang.Integer"
+            resultType="com.mao.pojo.VUsersConversionsPojo">
+        SELECT vscs.ownId,
+               vscs.ownState,
+               vscs.friendId,
+               vscs.friendRemark,
+               vscs.friendIcon,
+               vscs.friendState,
+               vscs.createTime
+        FROM v_users_conversions vscs
+        WHERE ownId=#{ownId};
+    </select>
+</mapper>

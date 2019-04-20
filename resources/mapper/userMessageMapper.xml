@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mao.dao.MessageDao">
+
+    <insert id="insertMessage" parameterType="com.mao.model.UserMessageEntity">
+        INSERT INTO `Project`.user_message(messageContent, messageTypeId, messageFuserId,
+                                           messageTuserId)
+        VALUES (#{messageContent}, 1, #{messageFuserId}, #{messageTuserId});
+    </insert>
+
+    <select id="getMessage" parameterType="map" resultType="com.mao.pojo.VUsersMessagesPojo">
+        (select *
+         from v_users_messages
+         where messageFuserId = #{messageFuserId}
+           and messageTuserId = #{messageTuserId})
+        UNION ALL
+        (select *
+         from v_users_messages
+         where messageFuserId = #{messageTuserId}
+           and messageTuserId = #{messageFuserId})
+        ORDER BY messageDate;
+    </select>
+
+    <select id="getUnreadMessageAmounts" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(um.messageStatus)
+        FROM `Project`.user_message um
+        WHERE um.messageStatus = 'no'
+          AND um.messageTuserId = #{cUserId}
+    </select>
+
+    <select id="getSpecifiedUnreadMessageAmounts" parameterType="java.lang.Integer" resultType="com.mao.pojo.VUserUnreadMessageCounts">
+        SELECT vuuma.messageFuserId,unReadMessageCount
+        FROM v_user_unreadmessagecounts vuuma
+        WHERE vuuma.messageTuserId = #{messageTuserId};
+    </select>
+
+    <update id="updateMessageStatusToRead" parameterType="map">
+        UPDATE `Project`.user_message
+        SET messageStatus='yes'
+        WHERE messageFuserId = #{messageFuserId}
+          AND messageTuserId = #{messageTuserId};
+    </update>
+</mapper>

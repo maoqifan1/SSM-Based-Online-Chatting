@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!-- configure data source -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/Project?characterEncoding=utf-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="qq214031mm@"/>
+        <!-- maximum numbers of connection -->
+        <property name="maxTotal" value="30"/>
+        <!-- maximum numbers of idle connection  -->
+        <property name="maxIdle" value="10"/>
+        <!-- init numbers of connection -->
+        <property name="initialSize" value="5"/>
+    </bean>
+    <!-- add transaction support -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- open annotations of things  -->
+    <tx:annotation-driven transaction-manager="txManager"/>
+    <!-- configure mybatis factory and specify data source, and integration with mybatis -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- configLocation's value is the location where save mybatis-config file -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+    <!-- mapper agent development  -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- scanner of mybatis component -->
+        <property name="basePackage" value="com.mao.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <!-- specify the package that needs scanning,making annotation work -->
+    <context:component-scan base-package="com.mao.service"/>
+</beans>

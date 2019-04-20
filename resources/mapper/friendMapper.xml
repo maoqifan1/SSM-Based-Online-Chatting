@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mao.dao.FriendDao">
+
+    <insert id="addUser" parameterType="com.mao.model.UsersGroupEntity">
+        INSERT INTO `users_group`
+        (`cuserId`, `friendId`, `relationShip`, `userGroup`, `friendGroup`, `userRemark`, `friendRemark`)
+        VALUES (#{cuserId}, #{friendId}, #{relationShip}, #{userGroup}, #{friendGroup}, #{userRemark}, #{friendRemark});
+    </insert>
+
+    <select id="printGroupAndFriendUnderGroup" parameterType="java.lang.Integer"
+            resultType="com.mao.pojo.VUsersGroupPojo">
+        SELECT vsgp.friendId,vsgp.friendIcon,vsgp.friendRemark,vsgp.myGroup
+        FROM v_users_group vsgp
+        WHERE vsgp.ownId = #{ownId}
+          AND vsgp.realtionship = 'friend';
+
+    </select>
+
+    <update id="changeUsersGroupToDefault" parameterType="com.mao.model.GroupEntity">
+        UPDATE `Project`.users_group usgp
+        SET usgp.userGroup = #{groupname}
+        WHERE usgp.cuserId = #{userid};
+    </update>
+
+    <select id="viewFriendById" parameterType="java.lang.Integer" resultType="com.mao.pojo.VUsersIcons">
+        SELECT vui.userid,vui.username,vui.phone,vui.email,vui.imagesource
+        FROM v_users_icons vui
+        WHERE (vui.userid = #{fuserId})
+
+    </select>
+
+    <select id="getUserRelationShip" parameterType="com.mao.model.UsersGroupEntity">
+        SELECT *
+        FROM `users_group`
+        WHERE (`cuserId` = #{cuserId} AND `friendId` = #{friendId});
+    </select>
+
+    <update id="changeUserRelationship" parameterType="com.mao.model.UsersGroupEntity">
+        UPDATE Project.`users_group`
+        SET `users_group`.`relationShip`=#{relationShip},
+            `users_group`.`friendGroup`=#{friendGroup},
+            `users_group`.`friendRemark` = #{friendRemark}
+        WHERE `users_group`.cuserId = #{cuserId}
+          AND `users_group`.friendId = #{friendId};
+    </update>
+
+    <update id="changeUserRemark" parameterType="com.mao.model.UsersGroupEntity">
+        UPDATE Project.`users_group`
+        SET `users_group`.userRemark = #{userRemark}
+            OR `users_group`.friendRemark = #{friendRemark}
+        WHERE users_group.cuserId = #{cuserId}
+           OR `users_group`.friendId = #{friendId};
+    </update>
+
+</mapper>

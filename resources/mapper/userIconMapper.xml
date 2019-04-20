@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mao.dao.UserIconDao">
+
+    <insert id="insertUserIcon" parameterType="com.mao.model.UserIconEntity">
+        INSERT INTO `user_icon`(`userid`, `imagesource`)
+        VALUES (#{userid}, #{imagesource});
+    </insert>
+
+    <select id="getUserIcon" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT `imagesource`
+        FROM `user_icon`
+        WHERE `userid` = #{userid};
+    </select>
+
+    <update id="updateUserIcon" parameterType="com.mao.model.UserIconEntity">
+        UPDATE `user_icon`
+        SET `user_icon`.imagesource=#{imagesource}
+        WHERE `user_icon`.userid = #{userid};
+    </update>
+
+    <select id="getUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(`Project`.user_icon.userid)
+        FROM user_icon
+        WHERE user_icon.userid = #{userId};
+    </select>
+
+
+</mapper>

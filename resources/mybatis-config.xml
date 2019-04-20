@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+
+        <!-- 打开延迟加载的开关 -->
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+
+    </settings>
+    <mappers>
+        <mapper resource="mapper/userMapper.xml" />
+        <mapper resource="mapper/searchMapper.xml" />
+        <mapper resource="mapper/groupMapper.xml" />
+        <mapper resource="mapper/infoMapper.xml"/>
+        <mapper resource="mapper/friendMapper.xml"/>
+        <mapper resource="mapper/userIconMapper.xml"/>
+        <mapper resource="mapper/imageMapper.xml"/>
+        <mapper resource="mapper/userConversionMapper.xml"/>
+        <mapper resource="mapper/userMessageMapper.xml"/>
+    </mappers>
+</configuration>

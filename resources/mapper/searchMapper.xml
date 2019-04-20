@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mao.dao.SearchDao">
+    <select id="searchUserByEmail" parameterType="java.lang.String" resultType="com.mao.pojo.VUsersIcons">
+        SELECT vui.userid,vui.username,vui.phone,vui.email,vui.imagesource
+        FROM v_users_icons vui
+        WHERE (vui.email LIKE CONCAT('%', #{userEmail}));
+
+    </select>
+
+    <select id="searchUserByUserName" parameterType="java.lang.String" resultType="com.mao.pojo.VUsersIcons">
+        SELECT vui.userid,vui.username,vui.phone,vui.email,vui.imagesource
+        FROM v_users_icons vui
+        WHERE (vui.username LIKE CONCAT('%', #{userName}, '%'));
+
+    </select>
+
+    <select id="searchUserByPhone" parameterType="java.lang.String" resultType="com.mao.pojo.VUsersIcons">
+        SELECT vui.userid,vui.username,vui.phone,vui.email,vui.imagesource
+        FROM v_users_icons vui
+        WHERE (vui.phone LIKE CONCAT('%', #{phoneNumber}));
+    </select>
+
+    <select id="searchUserByID" parameterType="java.lang.Integer" resultType="com.mao.pojo.VUsersIcons">
+        SELECT vui.userid,vui.username,vui.phone,vui.email,vui.imagesource
+        FROM v_users_icons vui
+        WHERE (vui.userid = #{userId})
+    </select>
+
+</mapper>

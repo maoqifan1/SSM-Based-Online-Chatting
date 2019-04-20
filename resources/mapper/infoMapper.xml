@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mao.dao.InfoDao">
+    <insert id="sendInfo" parameterType="com.mao.model.UserInformEntity">
+        INSERT INTO `user_inform`(`fuserId`, `tuserId`, `info`)
+        VALUES (#{fuserId}, #{tuserId}, #{info});
+    </insert>
+
+    <select id="showInfo" parameterType="java.lang.Integer" resultType="com.mao.pojo.userInformPojo">
+        SELECT ui.fuserId,ui.tuserId,ui.info,ui.active,ui.active,uc.imagesource
+        FROM `user_inform` ui,
+             `user_icon` uc
+        WHERE ui.tuserId = #{ownerUserId}
+          AND uc.userid = ui.fuserId;
+    </select>
+
+    <update id="updateActive" parameterType="com.mao.model.UserInformEntity">
+        UPDATE `Project`.user_inform
+        SET `user_inform`.active=#{active}
+        WHERE `user_inform`.fuserId = #{fuserId}
+          AND `user_inform`.tuserId = #{tuserId};
+    </update>
+</mapper>

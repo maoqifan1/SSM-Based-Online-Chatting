@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.mao.model.GroupEntity">
+        <table name="group" schema="Project" />
+        <id-class class="com.mao.model.GroupEntityPK"/>
+        <attributes>
+            <id name="userid">
+                <column name="userid"/>
+            </id>
+            <id name="groupname">
+                <column name="groupname"/>
+            </id>
+        </attributes>
+    </entity>
+</entity-mappings>

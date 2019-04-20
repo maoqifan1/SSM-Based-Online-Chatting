@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.mao.model.UsersGroupEntity">
+        <table name="users_group" schema="Project" />
+        <id-class class="com.mao.model.UsersGroupEntityPK"/>
+        <attributes>
+            <id name="cuserId">
+                <column name="cuserId"/>
+            </id>
+            <id name="friendId">
+                <column name="friendId"/>
+            </id>
+            <basic name="relationShip">
+                <column name="relationShip"/>
+            </basic>
+            <basic name="userGroup">
+                <column name="userGroup"/>
+            </basic>
+            <basic name="friendGroup">
+                <column name="friendGroup"/>
+            </basic>
+            <basic name="userRemark">
+                <column name="userRemark"/>
+            </basic>
+            <basic name="friendRemark">
+                <column name="friendRemark"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

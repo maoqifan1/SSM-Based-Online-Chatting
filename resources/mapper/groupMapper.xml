@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mao.dao.GroupDao">
+
+    <insert id="addGroup" parameterType="com.mao.model.GroupEntity">
+        INSERT INTO `Project`.`group`(`userid`, `groupname`)
+        VALUES (#{userid}, #{groupname});
+    </insert>
+
+    <update id="updGroup" parameterType="com.mao.model.GroupEntity">
+        UPDATE `Project`.`group`
+        SET `group`.`groupname` = #{groupname}
+        WHERE `group`.`userid` = #{userid};
+    </update>
+
+    <delete id="delGroup" parameterType="com.mao.model.GroupEntity">
+        DELETE
+        FROM `Project`.`group`
+        WHERE `group`.`groupname` = #{groupname}
+          AND `group`.`userid` = #{userid};
+    </delete>
+
+    <select id="getAllGroups" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT `Project`.`group`.`groupname`
+        FROM `group`
+        WHERE `group`.userid = #{curUserId}
+    </select>
+
+    <select id="getOwnerGroup" parameterType="com.mao.model.GroupEntity" resultType="java.lang.String">
+        SELECT `Project`.`group`.`groupname`
+        FROM `group`
+        WHERE `group`.userid = #{userid}
+          AND `group`.`groupname` = #{groupname};
+    </select>
+
+
+</mapper>

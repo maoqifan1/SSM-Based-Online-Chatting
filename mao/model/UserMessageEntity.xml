@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.mao.model.UserMessageEntity">
+        <table name="user_message" schema="Project"/>
+        <attributes>
+            <id name="messageId">
+                <column name="messageId"/>
+            </id>
+            <basic name="messageContent">
+                <column name="messageContent"/>
+            </basic>
+            <basic name="messageStatus">
+                <column name="messageStatus"/>
+            </basic>
+            <basic name="messageDate">
+                <column name="messageDate"/>
+            </basic>
+            <basic name="messageTypeId">
+                <column name="messageTypeId"/>
+            </basic>
+            <basic name="messageFuserId">
+                <column name="messageFuserId"/>
+            </basic>
+            <basic name="messageTuserId">
+                <column name="messageTuserId"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

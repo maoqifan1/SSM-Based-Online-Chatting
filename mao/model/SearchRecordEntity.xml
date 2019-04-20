@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.mao.model.SearchRecordEntity">
+        <table name="search_record" schema="Project" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id"/>
+            </id>
+            <basic name="suserid">
+                <column name="suserid"/>
+            </basic>
+            <basic name="record">
+                <column name="record"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
